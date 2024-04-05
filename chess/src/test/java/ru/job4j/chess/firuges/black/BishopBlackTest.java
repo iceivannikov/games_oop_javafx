@@ -43,7 +43,8 @@ class BishopBlackTest {
         ImpossibleMoveException exception = assertThrows(
                 ImpossibleMoveException.class, () -> bishopBlack.way(g6)
         );
-        assertThat(exception.getMessage()).isEqualTo(String.format("Could not move by diagonal from %s to %s",
-                bishopBlack.position(), g6));
+        assertThat(exception.getMessage()).isEqualTo(
+                String.format("Could not move by diagonal from %s to %s",
+                        bishopBlack.position(), g6));
     }
 }

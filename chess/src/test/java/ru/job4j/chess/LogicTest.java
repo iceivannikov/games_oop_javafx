@@ -14,12 +14,15 @@ public class LogicTest {
     public void whenMoveThenFigureNotFoundException()
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
-        FigureNotFoundException exception = assertThrows(FigureNotFoundException.class, () -> logic.move(Cell.C1, Cell.H6));
+        FigureNotFoundException exception = assertThrows(
+                FigureNotFoundException.class,
+                () -> logic.move(Cell.C1, Cell.H6));
         assertThat(exception.getMessage()).isEqualTo("Figure not found on the board.");
     }
 
     @Test
-    void whenMoveValid() throws FigureNotFoundException, ImpossibleMoveException, OccupiedCellException {
+    void whenMoveValid()
+            throws FigureNotFoundException, ImpossibleMoveException, OccupiedCellException {
         Logic logic = new Logic();
         Figure figure = new BishopBlack(Cell.C1);
         logic.add(figure);
@@ -39,8 +42,12 @@ public class LogicTest {
         BishopBlack bishop2 = new BishopBlack(Cell.E3);
         logic.add(bishop1);
         logic.add(bishop2);
-        OccupiedCellException exception = assertThrows(OccupiedCellException.class, () -> logic.move(Cell.C1, Cell.H6));
-        assertThat(exception.getMessage()).isEqualTo("The dest cell or on the path of the figure is occupied");
+        OccupiedCellException exception = assertThrows(
+                OccupiedCellException.class,
+                () -> logic.move(Cell.C1, Cell.H6));
+        assertThat(exception.getMessage()).isEqualTo(
+                "The dest cell or on the path of the figure is occupied"
+        );
     }
 
     @Test
@@ -51,8 +58,11 @@ public class LogicTest {
         logic.add(bishop1);
         Cell position = bishop1.position();
         Cell dest = Cell.E2;
-        ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class, () -> logic.move(position, dest));
-        assertThat(exception.getMessage()).isEqualTo(String.format("Could not move by diagonal from %s to %s",
-                position, dest));
+        ImpossibleMoveException exception = assertThrows(
+                ImpossibleMoveException.class,
+                () -> logic.move(position, dest));
+        assertThat(exception.getMessage()).isEqualTo(String.format(
+                "Could not move by diagonal from %s to %s", position, dest
+        ));
     }
 }
